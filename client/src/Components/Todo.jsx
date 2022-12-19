@@ -1,3 +1,5 @@
+import React from "react";
+import AddTodo from "./AddTodo";
 
 
 const Todo = ({ todos, deleteTodo }) => {
@@ -19,9 +21,14 @@ const Todo = ({ todos, deleteTodo }) => {
 
 
     return ( 
-        <div className="todos collection">
+        <React.Fragment>
+             <div className="todos collection">
             { todoList }
         </div>
+        <div className="form">
+              <AddTodo />  
+        </div>
+       </React.Fragment>
      );
 }
  

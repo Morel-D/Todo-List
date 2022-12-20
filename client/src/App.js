@@ -1,5 +1,8 @@
 import Todo from "./Components/Todo";
 import React, { Components } from 'react';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import Navbar from "./Components/Navbar";
+import About from "./Components/About";
 
 
 function App() {
@@ -22,16 +25,17 @@ function App() {
   }
 
   return (
-    <div className="App">
-      <header className="App-header">
-      </header>
-
-      <div className="container center todo-app py-5">
-        <h2 className="pink-text"><b>Todo List</b></h2>
-        <Todo  todos={todos} deleteTodo ={ deleteTodo } />
+    <BrowserRouter>
+      <div className="App">
+        <header className="App-header">
+          <Navbar />
+        </header>
+        <Routes>
+          <Route  path="/" element ={<Todo  todos={todos} deleteTodo ={ deleteTodo } />} />
+          <Route path="/aboutUs" element={<About />}/>
+        </Routes>
       </div>
-
-    </div>
+    </BrowserRouter>
   );
 }
 

@@ -21,14 +21,18 @@ const Todo = ({ todos, deleteTodo }) => {
 
 
     return ( 
-        <React.Fragment>
-             <div className="todos collection">
-            { todoList }
+
+        <div className="Todos">
+            <div className="container center todo-app py-5">
+                <div className="todos collection">
+                   { todoList }
+                 </div>
+                <div className="form">
+                  <AddTodo />  
+                </div>
+            </div>
         </div>
-        <div className="form">
-              <AddTodo />  
-        </div>
-       </React.Fragment>
+
      );
 }
  

@@ -4,6 +4,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Navbar from "./Components/Navbar";
 import About from "./Components/About";
 import Details from "./Components/Details";
+import Edit from "./Components/Edit";
 
 
 function App() {
@@ -34,7 +35,8 @@ function App() {
         <Routes>
           <Route  path="/" element ={<Todo  todos={todos} deleteTodo ={ deleteTodo } />} />
           <Route path="/aboutUs" element={<About />}/>
-          <Route path="/details" element={<Details />}/>
+          <Route path="/details" element={<Details />} />
+          <Route path="/:id" element ={<Edit />} />
         
         </Routes>
       </div>

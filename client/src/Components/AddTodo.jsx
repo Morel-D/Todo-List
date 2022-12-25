@@ -1,12 +1,19 @@
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { addUser } from "./useSlice";
 
 const AddTodo = () => {
 
     const [text, setText] = useState();
+    const dispatch = useDispatch();
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        console.log(text)
+        setText('')
+        dispatch(addUser({
+            id: '4',
+            content: text
+        }))
     }
 
 

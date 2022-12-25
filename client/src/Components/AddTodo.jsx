@@ -11,7 +11,7 @@ const AddTodo = () => {
 
 
     return ( 
-        <div className="py-2">
+        <div className="py-3">
             <form onSubmit={handleSubmit}>
                 <label className="">Add a Todo</label>
                 <input type="text"

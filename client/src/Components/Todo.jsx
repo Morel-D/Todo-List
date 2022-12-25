@@ -1,15 +1,21 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import AddTodo from "./AddTodo";
 
 
-const Todo = ({ todos, deleteTodo }) => {
 
+const Todo = () => {
+
+    const todos = useSelector(Store => Store.users)
+    console.log("This", todos);
 
     const todoList = todos.length ? (
         todos.map((todo) => {
             return (
-            <div className="collection-item" key={todo.id}>
-                <span onClick={() => { deleteTodo(todo.id) }}>{todo.content}</span>
+            <div className="card p-4 shadow-sm col-7" key={todo.id}>
+                    <div className="">
+                        <span className="text-start">{todo.content} </span>
+                    </div>
             </div>
            )
         })
@@ -24,11 +30,13 @@ const Todo = ({ todos, deleteTodo }) => {
 
         <div className="Todos">
             <div className="container center todo-app py-5">
-                <div className="todos collection">
-                   { todoList }
-                 </div>
-                <div className="form">
+    
+            <div className="form">
                   <AddTodo />  
+                </div>
+                
+                <div className="todos py-3">
+                  { todoList }
                 </div>
             </div>
         </div>

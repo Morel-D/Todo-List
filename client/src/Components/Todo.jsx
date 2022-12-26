@@ -1,20 +1,32 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import AddTodo from "./AddTodo";
+import { Link } from 'react-router-dom';
 
 
 
 const Todo = () => {
 
     const todos = useSelector(Store => Store.users)
-    console.log("This", todos);
+    // console.log("This", todos);
 
     const todoList = todos.length ? (
         todos.map((todo) => {
             return (
             <div className="card p-4 shadow-sm col-7" key={todo.id}>
                     <div className="">
-                        <span className="text-start">{todo.content} </span>
+                        <div className="text-start">
+                        <label className="mx-2">Task {todo.id}</label>
+                        </div>
+                        <div className="row">
+                            <div className="col text-start">
+                            <span className="text-start">{todo.content} </span>
+                            </div>
+                            <div className="col text-end">
+                                <span className="text-start"><i className="bi bi-trash"></i></span>
+                                <span className="mx-3"><Link to={`/${todo.id}`}><i className="bi bi-pencil"></i></Link></span>
+                            </div>
+                        </div>
                     </div>
             </div>
            )

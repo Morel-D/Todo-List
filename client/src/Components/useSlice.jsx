@@ -12,10 +12,20 @@ const userSlice = createSlice({
     reducers: {
         addUser: (state, action) => {
             state.push(action.payload);
+        },
+
+        editUser: (state, action) => {
+            const { id, content } = action.payload;
+            const existingUser = state.find(user => user.id == id);
+            if (existingUser)
+            {
+                existingUser.content = content;
+            }
+            
         }
     }
 });
 
-export const { addUser } = userSlice.actions;
+export const { addUser, editUser } = userSlice.actions;
 export default userSlice.reducer;
 

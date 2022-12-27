@@ -1,5 +1,6 @@
 require('dotenv').config();
 const express = require('express');
+const todoList = require('./Router/todoList');
 
 // Express App
 const app = express();
@@ -15,3 +16,5 @@ app.use((req, res, next) => {
 app.listen(process.env.PORT, () => {
     console.log('Listening on port ', process.env.PORT);
 })
+
+app.use('/Todo', todoList);

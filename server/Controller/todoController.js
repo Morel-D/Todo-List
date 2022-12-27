@@ -1,26 +1,69 @@
-
+const TodoList = require('../Model/todoModel');
+const mongoose = require('mongoose');
 
 const addTodo = (req, res) => {
-    res.json({"Message": "Todo hes been created"})
+    const newTodo = new TodoList(req.body);
+    newTodo.save()
+
+    TodoList.find()
+        .then((results) => {
+            res.json(results);
+        }).catch((error) => {
+        res.json(error.message)
+    })
 }
 
 const getAllTodos = (req, res) => {
-    res.json({ "Message" :"All Data has been display"})
-} 
+    TodoList.find().sort({ createdAt: -1 })
+        .then((results) => {
+        res.json(results)
+        }).catch((error) => {
+        res.json(error.message)
+    })
+}  
 
 
 const getSingle = (req, res) => {
-    res.json({"Message" : "Single data selected"})
+    const id = mongoose.Types.ObjectId(req.params.id);
+    TodoList.findById(id)
+        .then((results) => {
+        res.json(results)
+        }).catch((error) => {
+            res.json(error.message)
+    })
 }
 
 
 const deleteTodos = (req, res) => {
-    res.json({"Message" : "Single data deleted"})
+    const id = mongoose.Types.ObjectId(req.params.id);
+    TodoList.findByIdAndRemove(id)
+        .then((results) => {
+            res.json((results) => {
+            res.json(results)
+            }).catch((error) => {
+            res.json(error.message)
+        })
+    })
 }
 
+
+
 const updateTodo = (req, res) => {
-    res.json({"Message" : "Single data Update"})
+    const id = mongoose.Types.ObjectId(req.params.id);
+
+    const newTodo = 
+    {
+        content: req.body.content
+    }
+
+    TodoList.findByIdAndUpdate(id, newTodo)
+        .then((results) => {
+        res.json(results)
+        }).catch((error) => {
+        res.json(error.message)
+    })
 } 
+
 
 module.exports = 
 {

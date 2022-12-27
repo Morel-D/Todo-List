@@ -1,7 +1,8 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import AddTodo from "./AddTodo";
 import { Link } from 'react-router-dom';
+import { deleteUser } from "./useSlice";
 
 
 
@@ -9,6 +10,11 @@ const Todo = () => {
 
     const todos = useSelector(Store => Store.users)
     // console.log("This", todos);
+    const dispatch = useDispatch();
+    
+    const handleDelete = (id) => {
+        dispatch(deleteUser({ id: id}));
+    }
 
     const todoList = todos.length ? (
         todos.map((todo) => {
@@ -23,7 +29,7 @@ const Todo = () => {
                             <span className="text-start">{todo.content} </span>
                             </div>
                             <div className="col text-end">
-                                <span className="text-start"><i className="bi bi-trash"></i></span>
+                                <span className="text-start" onClick={() => {handleDelete(todo.id)}}><i className="bi bi-trash"></i></span>
                                 <span className="mx-3"><Link to={`/${todo.id}`}><i className="bi bi-pencil"></i></Link></span>
                             </div>
                         </div>

@@ -40,9 +40,7 @@ const deleteTodos = (req, res) => {
         .then((results) => {
             res.json((results) => {
             res.json(results)
-            }).catch((error) => {
-            res.json(error.message)
-        })
+            })
     })
 }
 

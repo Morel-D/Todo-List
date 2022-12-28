@@ -2,6 +2,7 @@ require('dotenv').config();
 const express = require('express');
 const todoList = require('./Router/todoList');
 const mongoose = require('mongoose');
+const cors = require('cors');
 
 // Express App
 const app = express();
@@ -13,6 +14,7 @@ app.use((req, res, next) => {
     console.log(req.path, req.method);
     next();
 })
+app.use(cors());
 
 // Databse Connection
 mongoose.connect(process.env.DB_URL)

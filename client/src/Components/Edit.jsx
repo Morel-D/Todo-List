@@ -2,42 +2,44 @@ import axios from "axios";
 import { useState } from "react";
 import { useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { editUser } from "./useSlice";
 
 const Edit = () => {
-
-
     const params = useParams();
-    const navigate = useNavigate();
-    const dispatch = useDispatch()
-    const todos = useSelector(Store => Store.users);
-    const existingUser = todos.filter(todo => todo.id == params.id);
-    const { content } = existingUser[0];
-    const [values, setValue] = useState({
-        content: content
-    })
+    const [text, setText] = useState();
+    const newContent = { content: "text" }
+
+    useEffect(() => {
+        axios.get(`http://localhost:5000/Todo/${params.id}`)
+            .then((response) => {
+            return  response.data
+            }).then((data) => {
+            setText(data.content)
+        })
+    }, [])
 
 
-    const handleEdit = (e) => 
+    const handleUpload = (e) => 
     {
         e.preventDefault();
-        setValue({ content: '' });
-        dispatch(editUser({
-            id: params.id,
-            content: values
-        }));
-        navigate('/');
-
-        console.log(values);
-        }
+        axios.put(`http://localhost:5000/Todo/${params.id}`, newContent)
+            .then((respoonse) => {
+            console.log(respoonse)
+            })
+        
+    }
     
+
+
+
     return ( 
 
         <div className="container center py-5">        
-            <form onSubmit={handleEdit}>
+            <form onSubmit={handleUpload}>
               <label>Edit Todo</label>
-                <input type="text" value={values.content} onChange={(e) => { setValue(e.target.value) }} />
+                <input type="text"
+                    value={text}
+                    onChange={(e) => setText(e.target.value)}
+                />
                 <button type="submit" className="btn">Upload</button>
             </form>
         </div>
